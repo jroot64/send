@@ -12,10 +12,10 @@ using namespace std;
 /*
 Errorcodes:
 0.) Anzeigen der Hilfe, wie die Eingabe richtig auszusehen habe.
-1.) Ungültige Anzahl an Parametern. Zahl der Parameter ist ungerade.
-2.) Ungültige Eingabe. Der Housecode muss mind. 1 Zeichen lang sein und darf nicht länger als 5 Zeichen lang sein.
-3.) Ungültige Eingabe. Der Housecode ist keine Binärzahl.
-4.) Ungültige Eingabe. Der Schaltparameter am Ende darf nur 0 oder 1 sein.
+1.) Ungï¿½ltige Anzahl an Parametern. Zahl der Parameter ist ungerade.
+2.) Ungï¿½ltige Eingabe. Der Housecode muss mind. 1 Zeichen lang sein und darf nicht lï¿½nger als 5 Zeichen lang sein.
+3.) Ungï¿½ltige Eingabe. Der Housecode ist keine Binï¿½rzahl.
+4.) Ungï¿½ltige Eingabe. Der Schaltparameter am Ende darf nur 0 oder 1 sein.
 */
 
 int main(int argc, char** argv)
@@ -23,19 +23,19 @@ int main(int argc, char** argv)
 	//Check variable for the number of parameters in the input.
 	int intUngueltigeEingabe = argc % 2;
 
+	//Checking if there is an invalid input. In case of that the number of parameters is uneven, the process will be terminated
+	if (intUngueltigeEingabe != 0)
+	{
+		cout << "1 Falsche Eingabe";
+		return 1;
+	}
 	//Checking if the user wants to display the help, if yes, there will be a text shown, which explains how the function call should look like.
-	if (argv[1] == "-h")
+	else if (argv[0] == "Send" && argv[1] == "-h")
 	{
 		cout << "0 Die richtige Eingabe erfolgt durch: Send {Housecode Devicecode HC DC usw} {Parameter Ob Ein- bzw Ausgeschaltet werden soll 1 = Ein 0 = Aus} Bsp: Send 001 2 0";
 		return 1;
 	}
 
-	//Checking if there is an invalid input. In case of that the number of parameters is uneven, the process will be terminated
-	else if (intUngueltigeEingabe != 0)
-	{
-		cout << "1 Falsche Eingabe";
-		return 1;
-	}
 
 	else
 	{
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 			int intLaengeDerEingabe = strlen(argv[i]);
 
 			if (intLaengeDerEingabe == 0 || intLaengeDerEingabe >5)
-				cout << "2 Ungueltige Eingabe. Der Housecode ist entweder 0 Zeichen lang oder länger als 5 Zeichen.";
+				cout << "2 Ungueltige Eingabe. Der Housecode ist entweder 0 Zeichen lang oder lï¿½nger als 5 Zeichen.";
 			else
 			{
 				//Checking if the input is composed of the numbers 1 and 0. If the input contains other numbers or characters the process will be terminated
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 				{
 					if (strUeberpruefen[x] != '0' & strUeberpruefen[x] != '1')
 					{
-						cout << "3 Eingabe ist keine Binärzahl.";
+						cout << "3 Eingabe ist keine Binï¿½rzahl.";
 						boolEingabeIstEineBinaerZahl = false;
 						return 1;
 					}
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 		if (boolEingabeIstEineBinaerZahl & boolEingabeGueltig & wiringPiSetup() != -1)
 		{
 			piHiPri(20);
-			RCSwitch switch;
+			RCSwitch switch = new RCSwitch;
 			switch.setPulseLength(300);
 			switch.enableTransmit(0);
 
