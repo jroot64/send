@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 				{
 					if (strUeberpruefen[x] != '0' & strUeberpruefen[x] != '1')
 					{
-						cout << "3 Eingabe ist keine Bin�rzahl.";
+						cout << "3 Eingabe ist keine Binärzahl.";
 						boolEingabeIstEineBinaerZahl = false;
 						return 1;
 					}
@@ -90,9 +90,10 @@ int main(int argc, char** argv)
 		if (boolEingabeIstEineBinaerZahl & boolEingabeGueltig & wiringPiSetup() != -1)
 		{
 			piHiPri(20);
-			RCSwitch switch = new RCSwitch;
-			switch.setPulseLength(300);
-			switch.enableTransmit(0);
+			RCSwitch switchPI;
+
+			switchPI.setPulseLength(300);
+			switchPI.enableTransmit(0);
 
 			//Switching the actuators. If the last number is an 1 they will switched on, else off
 			if (boolSchalten)
@@ -102,7 +103,7 @@ int main(int argc, char** argv)
 				//Loop for turn on the actuators with the corresponding house- and devicecode
 				for (int i = 0; i < intAnzahlDerZuSchaltendenAktoren; i++)
 				{
-					switch.switchOnBinary(argv[x], atoi(argv[x + 1]));
+					switchPI.switchOnBinary(argv[x], atoi(argv[x + 1]));
 					x += 2;
 				}
 			}
@@ -113,7 +114,7 @@ int main(int argc, char** argv)
 				//Loop for turn off the actuators with the corresponding house- and devicecode
 				for (int i = 0; i < intAnzahlDerZuSchaltendenAktoren; i++)
 				{
-					switch.switchOffBinary(argv[x], atoi(argv[x + 1]));
+					switchPI.switchOffBinary(argv[x], atoi(argv[x + 1]));
 					x += 2;
 				}
 			}
