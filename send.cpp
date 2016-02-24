@@ -90,7 +90,8 @@ int main(int argc, char** argv)
 		if (boolEingabeIstEineBinaerZahl & boolEingabeGueltig & wiringPiSetup() != -1)
 		{
 			piHiPri(20);
-			RCSwitch switchPI = new RCSwitch();
+
+			RCSwitch switchPI;
 
 			switchPI.setPulseLength(300);
 			switchPI.enableTransmit(0);
